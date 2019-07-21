@@ -1,0 +1,11 @@
+PSTOPIC
+    about_PSADS
+
+SHORT DESCRIPTION
+    PSADS allows you to work with the NTFS Alternate Data Streams through PowerShell functions
+
+LONG DESCRIPTION
+    PSADS allows you to work with the NTFS Alternate Data Streams through PowerShell functions
+
+DETAILED DESCRIPTION
+    PSADS allows you to work with the NTFS Alternate Data Streams through PowerShell functions
