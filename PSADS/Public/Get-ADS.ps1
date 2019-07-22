@@ -12,7 +12,7 @@ Path and Stream
 .OUTPUTS
 Stream or Streams (if any)
 .NOTES
-NTFS Alternate Data Streams are enumerated using this function. Tis is just a syntactic sugar.
+NTFS Alternate Data Streams are removed using this function. This is just a syntactic sugar wrapping exising capabilities.
 #>
 function Get-ADS {
     [CmdletBinding(SupportsShouldProcess=$true,

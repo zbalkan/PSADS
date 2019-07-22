@@ -12,7 +12,7 @@ Path and Stream
 .OUTPUTS
 One Symlink for each of the Streams (if any)
 .NOTES
-NTFS Alternate Data Streams are enumerated and exported using this function. This is just a syntactic sugar.
+NTFS Alternate Data Streams are removed using this function. This is just a syntactic sugar wrapping exising capabilities.
 #>
 function Export-ADS {
     [CmdletBinding(SupportsShouldProcess=$true,
