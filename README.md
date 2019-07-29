@@ -1,6 +1,8 @@
 # PSADS
 PSADS is a module to manage NTFS Alternate Data Streams through PowerShell functions.
 
+It does not attempt to give you advanced options which you cannot get by making use of existing PowerShell cmdlets. It just wraps them in order to manage the streams in a simpler way and constitues nothing more than a syntactic sugar.
+
 ## Functions
 ### Get-ADS
 Gets the Alternate Data Streams of a file: `Get-ADS -Path Foo.txt`
