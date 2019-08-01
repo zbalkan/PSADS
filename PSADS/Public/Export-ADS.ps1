@@ -1,16 +1,19 @@
 ﻿<#
 .SYNOPSIS
-Exports a specified ADS or all ADSs of a file as a symbolic link.
+Exports a specified ADS or all ADSs of a file as a symbolic link (default) or file.
 .DESCRIPTION
-When the Stream name is defined the function outputs one symlink for each, if exists. When not defined, it outputs all except the default.
+When the Stream name is defined the function outputs one symlink or file for each, if exists. When not defined, it outputs all except the default.
+When file is exported the file extension is set to ".UNKNOWN"
 .EXAMPLE
 Export-ADS -Path Foo.txt
 .EXAMPLE
 Export-ADS -Path Foo.txt -Stream Bar
+.EXAMPLE
+Export-ADS -Path Foo.txt -Stream Bar -Output Binary
 .INPUTS
 Path and Stream
 .OUTPUTS
-One Symlink for each of the Streams (if any)
+One Symlink or File for each of the Streams (if any)
 .NOTES
 NTFS Alternate Data Streams are removed using this function. This is just a syntactic sugar wrapping exising capabilities.
 #>
@@ -39,31 +42,45 @@ function Export-ADS {
             ValueFromPipelineByPropertyName=$false,
             ValueFromRemainingArguments=$false)]
         [string]
-        $Stream
-        )
+        $Stream,
 
+        # Output Type (Symlink by Default)
+        [Parameter(Mandatory=$false,
+            Position=2,
+            ValueFromPipeline=$false,
+            ValueFromPipelineByPropertyName=$false,
+            ValueFromRemainingArguments=$false)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet("Symlink", "Binary")]
+        [string]
+        $Output
+        )
+    
     begin {
     }
-
+    
     process {
-        if ($pscmdlet.ShouldProcess("Target", "Operation")) {
+        if ($pscmdlet.ShouldProcess("File in the path", "Export the ADS")) {
             if($null -eq $Stream -and $Stream.Length -ne 0) {
-                Get-ADS -Path $Path -Stream $Stream |
-                ForEach-Object {
-                    $item = Get-Item $Path
-                    [void] (New-Item -Path (Join-Path -Path $item.Directory -ChildPath "$($item.Name)_$($_.Stream)") -ItemType SymbolicLink -Value ("$($item.FullName):$($_.Stream)") -Force -Confirm:$false)
-                }
+                $Streams = Get-ADS -Path $Path -Stream $Stream
             }
             else {
-                Get-ADS -Path $Path |
-                ForEach-Object {
-                    $item = Get-Item $Path
-                    [void] (New-Item -Path (Join-Path -Path $item.Directory -ChildPath "$($item.Name)_$($_.Stream)") -ItemType SymbolicLink -Value ("$($item.FullName):$($_.Stream)") -Force -Confirm:$false)
+                $Streams = Get-ADS -Path $Path
+            }
+
+            $Streams | ForEach-Object {
+                $item = Get-Item $Path
+                if($Output -eq "Binary") {
+                    [void] (New-Item -Path (Join-Path -Path $item.Directory -ChildPath "$($item.Name)_$($_.Stream).UNKNOWN") -ItemType File -Value (Get-Content "$($item.FullName):$($_.Stream)" -Raw) -Force -Confirm:$false)
+                }
+                else {
+                    [void] (New-Item -Path (Join-Path -Path $item.Directory -ChildPath "$($item.Name)_$($_.Stream)") -ItemType SymbolicLink -Value  ("$($item.FullName):$($_.Stream)") -Force -Confirm:$false)
                 }
             }
         }
     }
-
+    
     end {
     }
 }
