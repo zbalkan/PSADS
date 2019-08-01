@@ -16,35 +16,35 @@ NTFS Alternate Data Streams are removed using this function. This is just a synt
 #>
 function Remove-ADS {
     [CmdletBinding(SupportsShouldProcess=$true,
-    PositionalBinding=$false,
-    HelpUri = 'http://www.github.com/zbalkan/PSADS',
-    ConfirmImpact='Medium')]
+        PositionalBinding=$false,
+        HelpUri = 'http://www.github.com/zbalkan/PSADS',
+        ConfirmImpact='Medium')]
     [Alias()]
     Param (
-    # Path of the file
-    [Parameter(Mandatory=$true,
-    Position=0,
-    ValueFromPipeline=$true,
-    ValueFromPipelineByPropertyName=$true,
-    ValueFromRemainingArguments=$false)]
-    [ValidateNotNull()]
-    [ValidateNotNullOrEmpty()]
-    [string]
-    $Path,
-    
-    # Stream
-    [Parameter(Mandatory=$false,
-    Position=1,
-    ValueFromPipeline=$false,
-    ValueFromPipelineByPropertyName=$false,
-    ValueFromRemainingArguments=$false)]
-    [string]
-    $Stream
-    )
-    
+        # Path of the file
+        [Parameter(Mandatory=$true,
+            Position=0,
+            ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true,
+            ValueFromRemainingArguments=$false)]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Path,
+
+        # Stream
+        [Parameter(Mandatory=$false,
+            Position=1,
+            ValueFromPipeline=$false,
+            ValueFromPipelineByPropertyName=$false,
+            ValueFromRemainingArguments=$false)]
+        [string]
+        $Stream
+        )
+
     begin {
     }
-    
+
     process {
         if ($pscmdlet.ShouldProcess("Target", "Operation")) {
             if($null -eq $Stream -and $Stream.Length -ne 0) {
@@ -55,7 +55,7 @@ function Remove-ADS {
             }
         }
     }
-    
+
     end {
     }
 }
