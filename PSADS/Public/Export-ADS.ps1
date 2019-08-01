@@ -9,13 +9,13 @@ Export-ADS -Path Foo.txt
 .EXAMPLE
 Export-ADS -Path Foo.txt -Stream Bar
 .EXAMPLE
-Export-ADS -Path Foo.txt -Stream Bar -Output Binary
+Export-ADS -Path Foo.txt -Stream Bar -Output File
 .INPUTS
 Path and Stream
 .OUTPUTS
 One Symlink or File for each of the Streams (if any)
 .NOTES
-NTFS Alternate Data Streams are removed using this function. This is just a syntactic sugar wrapping exising capabilities.
+NTFS Alternate Data Streams are exported using this function. This is just a syntactic sugar wrapping exising capabilities.
 #>
 function Export-ADS {
     [CmdletBinding(SupportsShouldProcess=$true,
@@ -52,7 +52,7 @@ function Export-ADS {
             ValueFromRemainingArguments=$false)]
         [ValidateNotNull()]
         [ValidateNotNullOrEmpty()]
-        [ValidateSet("Symlink", "Binary")]
+        [ValidateSet("Symlink", "File")]
         [string]
         $Output
         )
