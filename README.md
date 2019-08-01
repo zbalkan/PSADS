@@ -1,7 +1,7 @@
 # PSADS
 PSADS is a module to manage NTFS Alternate Data Streams through PowerShell functions.
 
-It does not attempt to give you advanced options which you cannot get by making use of existing PowerShell cmdlets. It just wraps them in order to manage the streams in a simpler way and constitues nothing more than a syntactic sugar.
+It does not attempt to give you advanced options which you cannot get by making use of existing PowerShell cmdlets. It just wraps them in order to manage the streams in a simpler way and constitutes nothing more than a syntactic sugar.
 
 ## Functions
 ### Get-ADS
@@ -15,7 +15,7 @@ Exports the Alternate Data Streams of a file: `Export-ADS -Path Foo.txt`
 You can also export a specific stream: `Export-ADS -Path Foo.txt -Stream Bar`
 
 #### Note
-This command does not remove the ADS. It hust creates a symlnk for each of the streams so that it does not intend to modify the file itself. It is possible to get the data of a stream and creating a new file.
+This command does not remove the ADS. It only creates a symlink for each of the streams so that it does not intend to modify the file itself. It is possible to get the data of a stream and creating a new file.
 
 ### New-ADS
 Adds a new Alternate Data Stream to a file with the specified name including the value: `New-ADS -Path Foo.txt -Stream Bar -Value $Value`
