@@ -1,4 +1,4 @@
-language: powershell
+language: generic
 
 matrix:
   include:
