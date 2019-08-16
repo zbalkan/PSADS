@@ -1,4 +1,6 @@
 # PSADS
+[![Build Status](https://travis-ci.org/zbalkan/PSADS.svg?branch=master)](https://travis-ci.org/zbalkan/PSADS)
+
 PSADS is a module to manage NTFS Alternate Data Streams through PowerShell functions.
 
 It does not attempt to give you advanced options which you cannot get by making use of existing PowerShell cmdlets. It just wraps them in order to manage the streams in a simpler way and constitutes nothing more than a syntactic sugar.
